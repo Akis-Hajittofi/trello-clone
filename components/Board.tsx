@@ -19,7 +19,7 @@ function Board() {
     getBoard();
   }, [getBoard]);
 
-  console.log("Board.tsx", board);
+  // console.log("Board.tsx", board);
 
   const handleOnDragEnd = (result: DropResult) => {
     const { destination, source, type } = result;
@@ -99,6 +99,12 @@ function Board() {
       updateTodoInDB(todoMoved, finishCol.id);
       setBoardState({ ...board, columns: newColumns });
     }
+    console.log(
+      "HERE ",
+      Array.from(board.columns.entries()).map(([id, column], index) => (
+        <Column key={id} id={id} todos={column.todos} index={index} />
+      ))
+    );
   };
 
   return (
