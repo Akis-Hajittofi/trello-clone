@@ -19,10 +19,11 @@ function Board() {
     getBoard();
   }, [getBoard]);
 
-  // console.log("Board.tsx", board);
-
   const handleOnDragEnd = (result: DropResult) => {
     const { destination, source, type } = result;
+    console.log("destination ===", destination);
+    console.log("source ===", source);
+    console.log("type ===", type);
 
     // Do nothing if the user drags card outside of the board
     if (!destination) return;
@@ -48,9 +49,11 @@ function Board() {
     const startColIndex = columns[Number(source.droppableId)];
     const finishColIndex = columns[Number(destination.droppableId)];
 
+    console.log("columns", columns);
+
     const startCol: Column = {
       id: startColIndex[0],
-      todos: finishColIndex[1].todos,
+      todos: startColIndex[1].todos,
     };
 
     const finishCol: Column = {
@@ -81,6 +84,7 @@ function Board() {
       // Need to make the correct changes in start and finish column to reflect the interaction
 
       const finishTodos = Array.from(finishCol.todos);
+
       finishTodos.splice(destination.index, 0, todoMoved);
 
       const newColumns = new Map(board.columns);
@@ -95,16 +99,16 @@ function Board() {
         todos: finishTodos,
       });
       // TODO: Update the DB based on the order of todos, rather than only when they change status
-
       updateTodoInDB(todoMoved, finishCol.id);
       setBoardState({ ...board, columns: newColumns });
     }
-    console.log(
-      "HERE ",
-      Array.from(board.columns.entries()).map(([id, column], index) => (
-        <Column key={id} id={id} todos={column.todos} index={index} />
-      ))
-    );
+
+    // console.log(
+    //   "column entries",
+    //   Array.from(board.columns.entries()).map(([id, column], index) => (
+    //     <Column key={id} id={id} todos={column.todos} index={index} />
+    //   ))
+    // );
   };
 
   return (

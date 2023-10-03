@@ -14,7 +14,7 @@ export const getTodosGroupedByColumn = async () => {
   // This takes in the array response and transforms it into a map
   // Allowing for cleaner use of data, essentially takes out the jargon
   // Instead of having inprogress and done mixed up, the map groups it into sepearate objects
-  const columns = todos.reduce((acc, todo) => {
+  const columns = todos.reduce((acc: any, todo: any) => {
     if (!acc.get(todo.status)) {
       acc.set(todo.status, {
         id: todo.status,
@@ -48,8 +48,8 @@ export const getTodosGroupedByColumn = async () => {
   console.log(columns);
 
   // Sort columns by columnTypes
-  const sortedColumns = new Map(
-    Array.from(columns.entries()).sort(
+  const sortedColumns: Map<TypedColumn, Column> = new Map(
+    [...columns.entries()].sort(
       (a, b) => columnTypes.indexOf(a[0]) - columnTypes.indexOf(b[0])
     )
   );

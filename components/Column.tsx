@@ -19,7 +19,6 @@ const idToColumnText: {
 
 function Column({ id, todos, index }: Props) {
   const [searchString] = useBoardStore((state) => [state.searchString]);
-
   return (
     <Draggable draggableId={id} index={index}>
       {(provided) => (
@@ -82,9 +81,7 @@ function Column({ id, todos, index }: Props) {
                       </Draggable>
                     );
                   })}
-
                   {provided.placeholder}
-
                   <div className="flex items-end justify-end p-2">
                     <button className="text-green-500 hover:text-green-600">
                       <PlusCircleIcon className="h-10 w-10" />
