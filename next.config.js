@@ -1,9 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["links.papareact.com"],
+    domains: ["cloud.appwrite.io", "links.papareact.com"],
   },
-  // reactStrictMode: false,
 };
 
 module.exports = nextConfig;
